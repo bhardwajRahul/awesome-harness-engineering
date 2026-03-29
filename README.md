@@ -1,6 +1,11 @@
-# Awesome Harness Engineering [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
-
-> Curated resources, patterns, and templates for building reliable AI agent harnesses.
+<div align="center">
+  <h1>Awesome Harness Engineering</h1>
+  <p>Curated resources, patterns, and templates for building reliable AI agent harnesses.</p>
+  <p>
+    <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Awesome"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-CC0-lightgrey.svg" alt="License: CC0"></a>
+  </p>
+</div>
 
 **Harness engineering** is the discipline of designing the scaffolding — context delivery, tool interfaces, planning artifacts, verification loops, memory systems, and sandboxes — that surrounds an AI agent and determines whether it succeeds or fails on real tasks.
 
@@ -10,14 +15,14 @@ This list focuses on the *harness*, not the model. Every component here exists b
 
 ## Contents
 
-- [Foundations](#foundations)
-- [Design Primitives](#design-primitives)
-- [Reference Implementations](#reference-implementations)
-- [Security, Sandbox & Permissions](#security-sandbox--permissions)
-- [Evals & Verification](#evals--verification)
-- [Templates](#templates)
-- [Related Awesome Lists](#related-awesome-lists)
-- [Contributing](#contributing)
+- [📐 Foundations](#foundations)
+- [🧩 Design Primitives](#design-primitives)
+- [🔍 Reference Implementations](#reference-implementations)
+- [🔒 Security, Sandbox & Permissions](#security-sandbox--permissions)
+- [✅ Evals & Verification](#evals--verification)
+- [📋 Templates](#templates)
+- [📚 Related Awesome Lists](#related-awesome-lists)
+- [🤝 Contributing](#contributing)
 
 ---
 
