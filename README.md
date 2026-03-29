@@ -37,6 +37,8 @@ This list focuses on the *harness*, not the model. Every component here exists b
   - [🧠 Memory & State](#memory--state)
   - [⚙️ Task Runners & Orchestration](#task-runners--orchestration)
   - [✔️ Verification & CI Integration](#verification--ci-integration)
+  - [👁️ Observability & Tracing](#observability--tracing)
+  - [🧑‍💼 Human-in-the-Loop](#human-in-the-loop)
 - [🔍 Reference Implementations](#reference-implementations)
   - [🎓 Tutorials & Educational](#tutorials--educational)
   - [🏭 Generators & Meta-Harnesses](#generators--meta-harnesses)
@@ -63,6 +65,7 @@ Canonical essays that define what harness engineering is and why it matters.
 - [Beyond Permission Prompts](https://www.anthropic.com/engineering/beyond-permission-prompts) — Anthropic on building structured permission and authorization systems into agent harnesses instead of relying on natural-language permission text.
 - [Demystifying Evals for AI Agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) — Anthropic's framework for evaluating agent behavior: what to measure, how to build eval harnesses, and why unit-test-style evals fail for agents.
 - [What is an AI Agent?](https://www.anthropic.com/research/what-is-an-agent) — Anthropic's definitional piece, useful for anchoring harness design decisions to a clear model of what an agent actually is.
+- [Agent Development Kit: Making it easy to build multi-agent applications](https://developers.googleblog.com/en/agent-development-kit-easy-to-build-multi-agent-applications/) — Google's announcement and design rationale for ADK: explains the multi-agent topology, tool registration model, and eval pipeline that shaped their framework. Complements the Anthropic/OpenAI framing with Google's production perspective.
 
 ---
 
@@ -73,6 +76,7 @@ Harness components organized by the problem they solve, not by vendor.
 ### Agent Loop
 
 - [Unrolling the Codex Agent Loop](https://openai.com/index/unrolling-the-codex-agent-loop/) — The canonical decomposition of what happens inside one agent loop iteration: observe, plan, act, verify.
+- [LangGraph — Low Level Concepts](https://langchain-ai.github.io/langgraph/concepts/low_level/) — Models the agent loop explicitly as a directed graph with typed state, conditional edges, and checkpointing. The most concrete engineering treatment of loop control flow: how to implement termination conditions, branch on tool results, and persist mid-loop state for resumption.
 
 ### Planning & Task Decomposition
 
@@ -89,6 +93,8 @@ Harness components organized by the problem they solve, not by vendor.
 ### Tool Design
 
 - [Writing Effective Tools for Agents](https://www.anthropic.com/engineering/writing-effective-tools-for-agents) — Tool naming, schema design, error messages, and return value conventions that make agents more reliable.
+- [Tool Use — Claude API Docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) — Authoritative reference for client vs. server tool execution models, strict schema enforcement, and tool_result error signaling. The distinction between client-side and server-side tool execution is a foundational harness architecture decision.
+- [Function Calling — OpenAI Docs](https://platform.openai.com/docs/guides/function-calling) — Defines the de facto industry-standard JSON Schema conventions for tool definitions and parallel function calling. Essential reading before designing a tool interface that needs to work across multiple models.
 
 ### Skills & MCP
 
@@ -111,10 +117,24 @@ Harness components organized by the problem they solve, not by vendor.
 - [Harness Engineering](https://openai.com/index/harness-engineering/) — How task runners fit into the harness: queueing, parallelism, and progress reporting.
 - [LangGraph](https://github.com/langchain-ai/langgraph) — Graph-based state machine framework for multi-agent harnesses: models supervisor/subagent topologies, error-recovery branches, and checkpoint persistence as first-class primitives. The most widely adopted harness orchestration layer in production. ![Stars](https://img.shields.io/github/stars/langchain-ai/langgraph?style=flat-square&label=★&color=yellow)
 - [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) — Lightweight multi-agent framework built around handoffs and guardrails; the production successor to Swarm. Complements LangGraph for harnesses where delegation patterns are simpler than full graph orchestration. ![Stars](https://img.shields.io/github/stars/openai/openai-agents-python?style=flat-square&label=★&color=yellow)
+- [Google ADK](https://github.com/google/adk-python) — Google's code-first agent framework with built-in multi-agent orchestration, tool registration, session state, and eval pipeline. Its `Runner` and `AgentTool` patterns are the reference implementation for wrapping sub-agents as tools in a larger harness. ![Stars](https://img.shields.io/github/stars/google/adk-python?style=flat-square&label=★&color=yellow)
+- [AutoGen](https://github.com/microsoft/autogen) — Microsoft's multi-agent conversation framework with a complete AgentChat layer covering agent loop, tool integration, termination conditions, and human-in-the-loop. The most comprehensive open-source reference for large-scale multi-agent harness design. ![Stars](https://img.shields.io/github/stars/microsoft/autogen?style=flat-square&label=★&color=yellow)
 
 ### Verification & CI Integration
 
 - [Demystifying Evals for AI Agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents) — How to build verification into the harness loop, not just as a post-hoc eval.
+- [promptfoo](https://github.com/promptfoo/promptfoo) — YAML-driven LLM testing framework with LLM-as-judge, assertion DSL, and native CI integration. The most practical tool for adding agent output regression tests to a PR pipeline without writing a test harness from scratch. ![Stars](https://img.shields.io/github/stars/promptfoo/promptfoo?style=flat-square&label=★&color=yellow)
+- [AgentBench](https://github.com/THUDM/AgentBench) — Multi-environment agent benchmark (OS, DB, web, code) with a structured eval pipeline. Worth studying for its environment isolation design and task definition format when building custom eval environments for your harness. ![Stars](https://img.shields.io/github/stars/THUDM/AgentBench?style=flat-square&label=★&color=yellow)
+
+### Observability & Tracing
+
+- [OpenLLMetry](https://github.com/traceloop/openllmetry) — OpenTelemetry-based instrumentation for LLM calls and agent steps: adds trace spans to every inference and tool call without modifying business logic. The cleanest way to bring the existing OTEL ecosystem (Grafana, Datadog, Jaeger) to a harness. ![Stars](https://img.shields.io/github/stars/traceloop/openllmetry?style=flat-square&label=★&color=yellow)
+- [Arize Phoenix](https://github.com/Arize-ai/phoenix) — Self-hostable trace UI and eval runtime for agent workflows. Lets harness engineers audit and replay every reasoning step and tool call offline, without sending data to a third-party cloud. ![Stars](https://img.shields.io/github/stars/Arize-ai/phoenix?style=flat-square&label=★&color=yellow)
+- [OTel GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) — OpenTelemetry's standard attribute names for GenAI spans (`gen_ai.system`, `gen_ai.request.model`, etc.). The naming baseline that makes harness traces portable across any OTEL-compatible backend.
+
+### Human-in-the-Loop
+
+- [LangGraph — Human-in-the-Loop Concepts](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop/) — Systematic treatment of interrupt, breakpoint, and approve patterns: how to pause an agent mid-loop, persist state, and resume after human review. Directly addresses the harness engineering challenge of inserting human gates into long-running workflows.
 
 ---
 
@@ -134,6 +154,8 @@ Real repositories worth studying — each with a note on *why* it's worth your t
 ### Demo Harnesses
 
 - [coleam00/your-claude-engineer](https://github.com/coleam00/your-claude-engineer) — Agent harness with Slack, GitHub, and Linear integrations. Useful reference for how real-world tool wiring works inside a harness. ![Stars](https://img.shields.io/github/stars/coleam00/your-claude-engineer?style=flat-square&label=★&color=yellow)
+- [OpenHands](https://github.com/OpenHands/OpenHands) — The most architecturally complete open-source coding agent: Runtime/Sandbox isolation, EventStream message bus, and Agent Controller are a three-layer harness design worth studying for production deployments. ![Stars](https://img.shields.io/github/stars/OpenHands/OpenHands?style=flat-square&label=★&color=yellow)
+- [browser-use](https://github.com/browser-use/browser-use) — Minimal browser-automation agent harness with clean separation of tool registration, DOM state injection, action loop, and error recovery. Small codebase, clear structure — the best "minimal viable harness" reference for understanding core loop mechanics. ![Stars](https://img.shields.io/github/stars/browser-use/browser-use?style=flat-square&label=★&color=yellow)
 
 ### Adjacent Collections
 
