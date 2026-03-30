@@ -6,15 +6,15 @@
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-CC0-lightgrey.svg" alt="License: CC0"></a>
   </p>
   <p>
-    <a href="https://zdoc.ai/de/ai-boost/awesome-harness-engineering">Deutsch</a> |
-    <a href="https://zdoc.ai/en/ai-boost/awesome-harness-engineering">English</a> |
-    <a href="https://zdoc.ai/es/ai-boost/awesome-harness-engineering">Español</a> |
-    <a href="https://zdoc.ai/fr/ai-boost/awesome-harness-engineering">Français</a> |
-    <a href="https://zdoc.ai/ja/ai-boost/awesome-harness-engineering">日本語</a> |
-    <a href="https://zdoc.ai/ko/ai-boost/awesome-harness-engineering">한국어</a> |
-    <a href="https://zdoc.ai/pt/ai-boost/awesome-harness-engineering">Português</a> |
-    <a href="https://zdoc.ai/ru/ai-boost/awesome-harness-engineering">Русский</a> |
-    <a href="https://zdoc.ai/zh/ai-boost/awesome-harness-engineering">中文</a>
+    <a href="https://zdoc.app/de/ai-boost/awesome-harness-engineering">Deutsch</a> |
+    <a href="https://zdoc.app/en/ai-boost/awesome-harness-engineering">English</a> |
+    <a href="https://zdoc.app/es/ai-boost/awesome-harness-engineering">Español</a> |
+    <a href="https://zdoc.app/fr/ai-boost/awesome-harness-engineering">Français</a> |
+    <a href="https://zdoc.app/ja/ai-boost/awesome-harness-engineering">日本語</a> |
+    <a href="https://zdoc.app/ko/ai-boost/awesome-harness-engineering">한국어</a> |
+    <a href="https://zdoc.app/pt/ai-boost/awesome-harness-engineering">Português</a> |
+    <a href="https://zdoc.app/ru/ai-boost/awesome-harness-engineering">Русский</a> |
+    <a href="https://zdoc.app/zh/ai-boost/awesome-harness-engineering">中文</a>
   </p>
 </div>
 
