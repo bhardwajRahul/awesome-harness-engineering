@@ -1,4 +1,5 @@
 <div align="center">
+  <img src="assets/banner.jpg" alt="Awesome Harness Engineering" width="720">
   <h1>Awesome Harness Engineering</h1>
   <p>Curated resources, patterns, and templates for building reliable AI agent harnesses.</p>
   <p>
